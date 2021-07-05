@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Card } from '../app.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
@@ -15,7 +15,7 @@ export class Task {
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
-export class CardComponent implements OnChanges{
+export class CardComponent implements OnInit{
 
   @Input() card?: Card;
 
@@ -28,12 +28,7 @@ export class CardComponent implements OnChanges{
   title: string = "";
   tasks: CheckboxComponent[] = []; 
 
-  ngOnChanges(changes: SimpleChanges) {
-    for (let propName in changes) {
-      if (propName === 'card?'){
-        
-      }
-    }
+  ngOnInit() {
     if (this.card?.tasks) {
       for (let task of this.card?.tasks){
         this.tasksData.push(plainToClass(CheckboxComponent, task))
