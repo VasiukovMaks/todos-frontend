@@ -1,0 +1,15 @@
+.navbar {
+    background-color: rgb(105, 187, 224);
+    color: #ffffff;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+span {
+    font-size: 1.5rem;
+}
+
+button {
+    border: 0px;
+    background-color: rgb(105, 187, 224);
+}

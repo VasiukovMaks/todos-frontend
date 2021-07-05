@@ -1,0 +1,30 @@
+p {
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+p .executed {
+    text-decoration: line-through;
+}
+
+p .notExecuted {
+    text-decoration: none;
+}
+
+mat-checkbox {
+    font-weight: 100;
+}
+
+mat-checkbox ::ng-deep .mat-checkbox-inner-container {
+    width: 20px;
+    height: 20px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: rgb(105, 187, 224);
+}
+
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+    border-color: rgb(156, 156, 156);
+    border-width: 1px;
+  }

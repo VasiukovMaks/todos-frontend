@@ -1,0 +1,43 @@
+<div class="modalWindow">
+    <h4 mat-dialog-title>НОВАЯ ЗАДАЧА</h4>
+    <hr>
+        
+    <form [formGroup]="taskReactiveForm">
+        <input 
+            placeholder="Название задачи..." 
+            type="text" 
+            id="name" 
+            formControlName="name" 
+            [(ngModel)] = "textValue"/>
+        <br/><br/>
+
+        <select 
+            formControlName="category" 
+            (change)="checkSelect()"
+            [(ngModel)]="selectValue">
+            <option 
+                [ngValue]="null" 
+                disabled
+                >Категоря</option>
+            <option 
+                *ngFor="let category of this.data" 
+                [ngValue]="category.title">
+                {{ category.title }}
+            </option>
+            <option>Новая категория...</option>
+        </select> 
+        <br/><br/>
+
+        <input *ngIf="displayInput"
+            placeholder="Название категории..." 
+            type="text" 
+            id="newcategory" 
+            formControlName="newcategory" 
+            [(ngModel)] = "categoryValue"/>
+    </form>
+
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close id="cancel">ОТМЕНА</button>
+        <button mat-dialog-ok (click)="newTask()" id="ok">ОК</button>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+.card {
+    width: 90%;
+    background-color: white;
+    box-shadow: 0 0 3px rgb(70, 70, 70);
+    margin: 30px;
+}
+
+.cardTitle {
+    padding: 10px;
+    font-weight: 500;
+    color: rgb(70, 70, 70);
+}
+hr {
+    margin: 0;
+    color: rgb(214, 214, 214);
+}

@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="cardTitle">{{ card?.title }}</div>
+    <hr>
+    <app-checkbox
+    *ngFor="let iterTask of tasksData"
+    [task]="iterTask"
+    ></app-checkbox>
+</div>
