@@ -6,7 +6,7 @@ import { CardComponent } from '../card/card.component';
 import { AppHttp } from '../service/app.http';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { plainToClass } from 'class-transformer';
+import { classToPlain, plainToClass } from 'class-transformer';
 
 
 @Component({
@@ -61,12 +61,14 @@ export class NewtaskComponent implements OnInit {
       let resp: any = response
       if (resp.id) {
         this.dialog.closeAll()
-        if (resp.title) {
+        if (this.selectValue === this.categoryValue) {
           this.data.push(plainToClass(CardComponent, resp))
         } else {
           for (let i=0; i<this.data.length; i++) {
-            if (this.data[i].id == resp.category_id) {
-              this.data[i].tasks.push(resp);
+            console.log(resp)
+            if (this.data[i].id == resp.id) {
+              this.data[i] = plainToClass(CardComponent, resp);
+              console.log(this.data)
               break
             }
           }
