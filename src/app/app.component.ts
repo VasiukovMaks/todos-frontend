@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppHttp } from './service/app.http';
-import { plainToClass } from 'class-transformer';
 import { CardComponent } from './card/card.component';
-import { CheckboxComponent } from './checkbox/checkbox.component';
-
-export interface Card {
-  id: number
-  title: string
-  tasks: CheckboxComponent[]
-}
 
 @Component({
   selector: 'app-root',
@@ -19,16 +11,16 @@ export interface Card {
 
 export class AppComponent implements OnInit {
   
-  todosData: Card[] = [];
-  
+  todosData: CardComponent[] = [];
   constructor (private httpService: AppHttp){}
 
   ngOnInit() {
-    this.httpService.get().subscribe(todos => {
-      let response: any = todos;
-      for (let category of response) {
-        this.todosData.push(plainToClass(CardComponent, category))
-      }
-    });
+    this.httpService.get().subscribe((data: CardComponent[]) => {
+      this.todosData = data
+      })
+  }
+
+  identificate(index: number, item: CardComponent):number {
+    return item.id
   }
 }

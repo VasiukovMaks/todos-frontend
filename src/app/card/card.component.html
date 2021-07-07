@@ -1,8 +1,8 @@
 <div class="card">
-    <div class="cardTitle">{{ card?.title }}</div>
+    <div class="cardTitle">{{ card.title }}</div>
     <hr>
     <app-checkbox
-    *ngFor="let iterTask of tasksData"
+    *ngFor="let iterTask of card.tasks; trackBy: identificate"
     [task]="iterTask"
     ></app-checkbox>
 </div>

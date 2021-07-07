@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiURL: "https://quiet-journey-25226.herokuapp.com/"
 };

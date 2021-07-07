@@ -1,6 +1,5 @@
-import { Component, Input, Optional } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { Task } from '../card/card.component';
 import { AppHttp } from '../service/app.http';
 
 @Component({
@@ -8,9 +7,10 @@ import { AppHttp } from '../service/app.http';
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.css']
 })
+
 export class CheckboxComponent {
   
-  @Input() task: Task = {id: 0, text: "", is_completed: false, category_id: 0}
+  @Input() task!: CheckboxComponent;
 
   constructor ( private httpService: AppHttp){}
 
@@ -21,10 +21,7 @@ export class CheckboxComponent {
 
   changeValue() {
     this.httpService.patch(this.task.category_id, this.task.id, !this.task.is_completed).subscribe(response => {
-      let resp: any = response
-      if (resp.message == "ok") {
-        this.task.is_completed = !this.task.is_completed;
-      }
+      this.task = response
     });
   }
 }

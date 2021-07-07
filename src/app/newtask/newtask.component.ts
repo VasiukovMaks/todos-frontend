@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { CardComponent } from '../card/card.component';
 import { AppHttp } from '../service/app.http';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { classToPlain, plainToClass } from 'class-transformer';
 
 
 @Component({
@@ -16,11 +15,7 @@ import { classToPlain, plainToClass } from 'class-transformer';
 })
 export class NewtaskComponent implements OnInit {
 
-
   displayInput: boolean = false;
-  textValue: string = "";
-  categoryValue: string = "";
-  selectValue: string= "";
 
   constructor(
     private fb: FormBuilder,
@@ -31,49 +26,68 @@ export class NewtaskComponent implements OnInit {
 
   taskReactiveForm: FormGroup = this.fb.group({});
 
-  ngOnInit() {
+  ngOnInit():void {
     this.initForm();
   }
 
 
-  initForm(){
+  initForm():void{
     this.taskReactiveForm = this.fb.group({
-     name: [null],
-     category: [null],
-     newcategory: [null]
+     task: ["Название задачи...", [
+      Validators.required,
+      Validators.minLength(3)
+     ]],
+     category: ["", [
+      Validators.required,
+     ]],
+     newСategory: ["Название категории...", [
+      Validators.required,
+      Validators.minLength(3)
+     ]]
     });
    }
 
 
-   checkSelect() {
-     if (this.selectValue === "Новая категория..." && !this.displayInput) {
+   checkSelect():void {
+     const controls = this.taskReactiveForm.controls;
+     if (controls.category.value === this.data.length + 1 && !this.displayInput) {
       this.displayInput = !this.displayInput;
     }
-      else if (this.selectValue !== "Новая категория..." && this.displayInput) {
+      else if (controls.category.value !== this.data.length + 1 && this.displayInput) {
         this.displayInput = !this.displayInput
      }
    }
+   
+
+  isControlInvalid(controlName: string): boolean {
+    const control = this.taskReactiveForm.controls[controlName];
+    const result: boolean = control.status === "INVALID" && control.touched;
+    return result;
+    }
+  isControlNewCategoryInvalid():boolean {
+    const control = this.taskReactiveForm.controls
+    
+    if (!this.displayInput) {
+      this.taskReactiveForm.controls.newСategory.setValue('Новая категория...')
+      return false}
+
+    return control.newСategory.status === "INVALID" && control.newСategory.touched
+  }
 
 
-   newTask() {
-    this.selectValue = this.selectValue === "Новая категория..."? this.categoryValue : this.selectValue;
-    this.httpService.post(this.selectValue, this.textValue).subscribe(response => {
-      let resp: any = response
-      if (resp.id) {
-        this.dialog.closeAll()
-        if (this.selectValue === this.categoryValue) {
-          this.data.push(plainToClass(CardComponent, resp))
-        } else {
-          for (let i=0; i<this.data.length; i++) {
-            console.log(resp)
-            if (this.data[i].id == resp.id) {
-              this.data[i] = plainToClass(CardComponent, resp);
-              console.log(this.data)
-              break
-            }
-          }
-        }
-      }
-    });
+  onSubmit() {
+    const controls = this.taskReactiveForm.controls;
+    
+    if (this.taskReactiveForm.status === "INVALID") {
+      Object.keys(controls)
+      .forEach(controlName => controls[controlName].markAsTouched());
+      return;
+    }
+
+    let requestTitle: string = this.displayInput ? controls.newСategory.value : this.data[controls.category.value - 1].title;
+    this.httpService.post(controls.category.value, requestTitle, controls.task.value)
+      .subscribe(response => {this.data[controls.category.value - 1] = response})
+    
+    this.dialog.closeAll()
    }
 }

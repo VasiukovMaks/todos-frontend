@@ -2,42 +2,40 @@
     <h4 mat-dialog-title>НОВАЯ ЗАДАЧА</h4>
     <hr>
         
-    <form [formGroup]="taskReactiveForm">
-        <input 
-            placeholder="Название задачи..." 
-            type="text" 
-            id="name" 
-            formControlName="name" 
-            [(ngModel)] = "textValue"/>
+    <form [formGroup]="taskReactiveForm" (submit)="onSubmit()">
+        <input type="text" id="task" formControlName="task"/>
         <br/><br/>
 
         <select 
             formControlName="category" 
-            (change)="checkSelect()"
-            [(ngModel)]="selectValue">
-            <option 
-                [ngValue]="null" 
-                disabled
-                >Категоря</option>
+            (click)="checkSelect()">
+            <option selected disabled hidden>Категория</option>
             <option 
                 *ngFor="let category of this.data" 
-                [ngValue]="category.title">
+                [ngValue]="category.id">
                 {{ category.title }}
             </option>
-            <option>Новая категория...</option>
+            <option [ngValue]="this.data.length + 1" >Новая категория...</option>
         </select> 
         <br/><br/>
 
         <input *ngIf="displayInput"
-            placeholder="Название категории..." 
             type="text" 
             id="newcategory" 
-            formControlName="newcategory" 
-            [(ngModel)] = "categoryValue"/>
-    </form>
+            formControlName="newСategory"/>
+        <div class="error" *ngIf="isControlNewCategoryInvalid()">
+            Название категории должно быть длиннее 3 символов
+        </div>
+        <div class="error" *ngIf="isControlInvalid('category')">
+            Должна быть выбрана категория
+        </div>
+        <div class="error" *ngIf="isControlInvalid('task')">
+            Навзание задачи должно быть длиннее 3 символов
+        </div>
 
-    <div mat-dialog-actions>
-        <button mat-button mat-dialog-close id="cancel">ОТМЕНА</button>
-        <button mat-dialog-ok (click)="newTask()" id="ok">ОК</button>
-    </div>
+        <div mat-dialog-actions>
+            <button mat-button mat-dialog-close id="cancel">ОТМЕНА</button>
+            <button mat-dialog-ok id="ok" type="submit">ОК</button>
+        </div>
+    </form>
 </div>

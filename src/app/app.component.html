@@ -4,7 +4,7 @@
     </header>
     <main>
         <app-card
-        *ngFor="let iterCard of todosData"
+        *ngFor="let iterCard of todosData; trackBy: identificate"
         [card]="iterCard"
         ></app-card>
     </main>
