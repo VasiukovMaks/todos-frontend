@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Checkbox } from '../custom-classes/app.custom.classes';
 
 import { AppHttp } from '../service/app.http';
 
@@ -10,17 +11,13 @@ import { AppHttp } from '../service/app.http';
 
 export class CheckboxComponent {
   
-  @Input() task!: CheckboxComponent;
+  @Input() task: Checkbox = {id: 0, text:"", is_completed: false, category_id: 0};
 
   constructor ( private httpService: AppHttp){}
 
-  id: number = 0;
-  text: string = "";
-  is_completed: boolean = false;
-  category_id: number = 0;
-
-  changeValue() {
-    this.httpService.patch(this.task.category_id, this.task.id, !this.task.is_completed).subscribe(response => {
+  changeValue():void {
+    this.httpService.patch(this.task.category_id, this.task.id, !this.task.is_completed)
+    .subscribe((response :Checkbox) => {
       this.task = response
     });
   }

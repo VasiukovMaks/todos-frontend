@@ -12,6 +12,15 @@ input, select{
 input.ng-touched.ng-invalid{
     border-color: red;
    }
+   select:required:invalid {
+    color: #666;
+  }
+  option[value=""][disabled] {
+    display: none;
+  }
+  option {
+    color: #000;
+  }
 form {
     display: flex;
     flex-direction: column;

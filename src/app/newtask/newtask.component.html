@@ -3,13 +3,13 @@
     <hr>
         
     <form [formGroup]="taskReactiveForm" (submit)="onSubmit()">
-        <input type="text" id="task" formControlName="task"/>
+        <input type="text" id="task" formControlName="task" placeholder="Название задачи..."/>
         <br/><br/>
-
-        <select 
-            formControlName="category" 
+        <select
+            required
+            formControlName="category"
             (click)="checkSelect()">
-            <option selected disabled hidden>Категория</option>
+            <option value="" disabled selected hidden>Категория</option>
             <option 
                 *ngFor="let category of this.data" 
                 [ngValue]="category.id">
@@ -19,18 +19,20 @@
         </select> 
         <br/><br/>
 
-        <input *ngIf="displayInput"
+        <input 
+            placeholder="Новая категория..."
+            *ngIf="displayInput"
             type="text" 
             id="newcategory" 
             formControlName="newСategory"/>
-        <div class="error" *ngIf="isControlNewCategoryInvalid()">
-            Название категории должно быть длиннее 3 символов
+        <div class="error" *ngIf="isControlInvalid('task')">
+            Навзание задачи должно быть длиннее 3 символов
         </div>
         <div class="error" *ngIf="isControlInvalid('category')">
             Должна быть выбрана категория
         </div>
-        <div class="error" *ngIf="isControlInvalid('task')">
-            Навзание задачи должно быть длиннее 3 символов
+        <div class="error" *ngIf="isControlNewCategoryInvalid()">
+            Название категории должно быть длиннее 3 символов
         </div>
 
         <div mat-dialog-actions>

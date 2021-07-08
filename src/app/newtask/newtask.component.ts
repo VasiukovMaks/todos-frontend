@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
-import { CardComponent } from '../card/card.component';
 import { AppHttp } from '../service/app.http';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Card, Checkbox } from '../custom-classes/app.custom.classes';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class NewtaskComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: CardComponent[],
+    @Inject(MAT_DIALOG_DATA) public data: Card[],
     private httpService: AppHttp,
     private dialog: MatDialog
     ) { }
@@ -33,14 +33,14 @@ export class NewtaskComponent implements OnInit {
 
   initForm():void{
     this.taskReactiveForm = this.fb.group({
-     task: ["Название задачи...", [
+     task: ["", [
       Validators.required,
       Validators.minLength(3)
      ]],
      category: ["", [
       Validators.required,
      ]],
-     newСategory: ["Название категории...", [
+     newСategory: ["", [
       Validators.required,
       Validators.minLength(3)
      ]]
@@ -49,7 +49,8 @@ export class NewtaskComponent implements OnInit {
 
 
    checkSelect():void {
-     const controls = this.taskReactiveForm.controls;
+     const controls: { [key:string]: AbstractControl} = this.taskReactiveForm.controls;
+     console.log(this.data, controls)
      if (controls.category.value === this.data.length + 1 && !this.displayInput) {
       this.displayInput = !this.displayInput;
     }
@@ -60,34 +61,36 @@ export class NewtaskComponent implements OnInit {
    
 
   isControlInvalid(controlName: string): boolean {
-    const control = this.taskReactiveForm.controls[controlName];
+    const control: AbstractControl = this.taskReactiveForm.controls[controlName];
     const result: boolean = control.status === "INVALID" && control.touched;
     return result;
     }
   isControlNewCategoryInvalid():boolean {
     const control = this.taskReactiveForm.controls
-    
     if (!this.displayInput) {
-      this.taskReactiveForm.controls.newСategory.setValue('Новая категория...')
+      control.newСategory.disable({onlySelf: true})
       return false}
-
+      control.newСategory.enable({onlySelf: true})
     return control.newСategory.status === "INVALID" && control.newСategory.touched
   }
 
 
-  onSubmit() {
-    const controls = this.taskReactiveForm.controls;
+  onSubmit():void{
+    const controls: { [key:string]: AbstractControl} = this.taskReactiveForm.controls;
     
     if (this.taskReactiveForm.status === "INVALID") {
       Object.keys(controls)
-      .forEach(controlName => controls[controlName].markAsTouched());
+      .forEach((controlName: string) => controls[controlName].markAsTouched());
       return;
     }
 
-    let requestTitle: string = this.displayInput ? controls.newСategory.value : this.data[controls.category.value - 1].title;
-    this.httpService.post(controls.category.value, requestTitle, controls.task.value)
-      .subscribe(response => {this.data[controls.category.value - 1] = response})
-    
-    this.dialog.closeAll()
+    if (this.displayInput) {
+      this.httpService.post_category(controls.category.value, controls.newСategory.value, controls.task.value)
+        .subscribe((response: Card) => {this.data.push(response)})
+    } else {
+      this.httpService.post_task(controls.category.value, controls.task.value)
+        .subscribe((response: Checkbox) => {this.data[controls.category.value - 1].tasks.push(response)})
+    }
+      this.dialog.closeAll()
    }
 }

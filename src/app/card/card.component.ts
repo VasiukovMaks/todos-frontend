@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { CheckboxComponent } from '../checkbox/checkbox.component';
-import { classToPlain, Type } from 'class-transformer';
+import { Card, Checkbox } from '../custom-classes/app.custom.classes';
 
 @Component({
   selector: 'app-card',
@@ -10,14 +9,9 @@ import { classToPlain, Type } from 'class-transformer';
 })
 export class CardComponent {
 
-  @Input() card!: CardComponent;
+  @Input() card!: Card; 
 
-  id: number = 0;
-  title: string = "";
-  @Type(()=>CheckboxComponent)
-  tasks: CheckboxComponent[] = [];   
-
-  identificate(index:number, item: CheckboxComponent): number {
+  identificate(index:number, item: Checkbox): number {
     return item.id
   }
 }

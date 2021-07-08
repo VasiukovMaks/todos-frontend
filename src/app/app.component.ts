@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppHttp } from './service/app.http';
-import { CardComponent } from './card/card.component';
+import { Card } from './custom-classes/app.custom.classes';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +11,16 @@ import { CardComponent } from './card/card.component';
 
 export class AppComponent implements OnInit {
   
-  todosData: CardComponent[] = [];
+  todosData: Card[] = [];
   constructor (private httpService: AppHttp){}
 
-  ngOnInit() {
-    this.httpService.get().subscribe((data: CardComponent[]) => {
+  ngOnInit():void {
+    this.httpService.get().subscribe((data: Card[]) => {
       this.todosData = data
       })
   }
 
-  identificate(index: number, item: CardComponent):number {
+  identificate(index: number, item: Card):number {
     return item.id
   }
 }

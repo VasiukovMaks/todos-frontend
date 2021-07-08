@@ -4,7 +4,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import { NewtaskComponent } from '../newtask/newtask.component';
 import { MatDialog } from '@angular/material/dialog';
-import { CardComponent } from '../card/card.component';
+import { Card } from '../custom-classes/app.custom.classes';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +14,7 @@ import { CardComponent } from '../card/card.component';
 
 export class NavbarComponent {
   
-  @Input() todosData!: CardComponent[];
+  @Input() todosData: Card[] = [];
 
   constructor(
     private matIconRegistry:MatIconRegistry,
