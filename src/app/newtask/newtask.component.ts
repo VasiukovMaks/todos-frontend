@@ -50,7 +50,6 @@ export class NewtaskComponent implements OnInit {
 
    checkSelect():void {
      const controls: { [key:string]: AbstractControl} = this.taskReactiveForm.controls;
-     console.log(this.data, controls)
      if (controls.category.value === this.data.length + 1 && !this.displayInput) {
       this.displayInput = !this.displayInput;
     }
@@ -86,7 +85,13 @@ export class NewtaskComponent implements OnInit {
 
     if (this.displayInput) {
       this.httpService.post_category(controls.category.value, controls.newСategory.value, controls.task.value)
-        .subscribe((response: Card) => {this.data.push(response)})
+        .subscribe((responseCard: Card) => {
+          this.httpService.post_task(controls.category.value, controls.task.value)
+            .subscribe((responseCheckbox: Checkbox) => {
+              responseCard.tasks.push(responseCheckbox)
+              this.data.push(responseCard)
+              })
+         })
     } else {
       this.httpService.post_task(controls.category.value, controls.task.value)
         .subscribe((response: Checkbox) => {this.data[controls.category.value - 1].tasks.push(response)})
