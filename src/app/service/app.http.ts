@@ -22,28 +22,47 @@ export class AppHttp {
 
         
     public get(): Observable<Card[]> {
-        return this.http.get(environment.apiURL + 'projects', {'headers': this.headers})
+        const url: string = environment.apiURL + 'projects';
+        return this.http.get(url, {'headers': this.headers})
         .pipe(
             map((res: Object) => plainToClass(Card, res as Card[]))
         )
     }
 
     public patch(id_category: number, id_task: number, isCompleted: boolean): Observable<Checkbox> {
-        return this.http.patch(environment.apiURL + 'projects/' + id_category + "/todo/"+ id_task, {is_completed: isCompleted}, {'headers': this.headers})
+        const url: string = environment.apiURL + 'projects/' + id_category + "/todo/"+ id_task;
+        return this.http.patch(url, {is_completed: isCompleted}, {'headers': this.headers})
         .pipe(
             map((res: Object) => plainToClass(Checkbox, res))
         )
     }
 
     public post_category(id: number, title: string, text: string): Observable<Card> {
-        return this.http.post(environment.apiURL + 'todos', {id: id, title: title, text: text}, {'headers': this.headers})
+        const url: string = environment.apiURL + 'category';
+        return this.http.post(url, {id: id, title: title, text: text}, {'headers': this.headers})
         .pipe(
             map((res: Object) => plainToClass(Card, res))
         )
     }
 
+    public delete_category(id: number): Observable<unknown> {
+        const url: string = environment.apiURL + 'category/' + id;
+        return this.http.delete(url, {'headers': this.headers})
+            .pipe(
+        )
+    }
+
     public post_task(id: number, text: string): Observable<Checkbox> {
-        return this.http.post(environment.apiURL + 'new-task', {category_id: id, text: text}, {'headers': this.headers})
+        const url: string = environment.apiURL + 'task';
+        return this.http.post(url, {category_id: id, text: text}, {'headers': this.headers})
+        .pipe(
+            map((res: Object) => plainToClass(Checkbox, res))
+        )
+    }
+
+    public delete_task(id: number): Observable<Checkbox> {
+        const url: string = environment.apiURL + 'task';
+        return this.http.post(url, {category_id: id}, {'headers': this.headers})
         .pipe(
             map((res: Object) => plainToClass(Checkbox, res))
         )

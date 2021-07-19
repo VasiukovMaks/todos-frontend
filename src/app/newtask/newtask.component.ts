@@ -94,7 +94,7 @@ export class NewtaskComponent implements OnInit {
          })
     } else {
       this.httpService.post_task(controls.category.value, controls.task.value)
-        .subscribe((response: Checkbox) => {this.data[controls.category.value - 1].tasks.push(response)})
+        .subscribe((response: Checkbox) => {this.data[this.data.findIndex(el => el.id === controls.category.value)].tasks.push(response)})
     }
       this.dialog.closeAll()
    }

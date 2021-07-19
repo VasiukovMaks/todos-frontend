@@ -1,5 +1,8 @@
 <div class="card">
     <div class="cardTitle">{{ card.title }}</div>
+    <button (click)="deleteCard()" mat-icon-button aria-label="icon-button with cross icon">
+        <mat-icon svgIcon="close">close</mat-icon>
+    </button>
     <hr>
     <app-checkbox
     *ngFor="let iterTask of card.tasks; trackBy: identificate"
