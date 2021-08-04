@@ -1,5 +1,11 @@
-<p><mat-checkbox 
-        [ngClass]="{'executed': task.is_completed === true, 'notExecuted' : task.is_completed === false }"
-        [checked]="task.is_completed" 
-        (click)="changeValue()"
-    >{{ task.text }}</mat-checkbox></p>
+<p>
+  <mat-checkbox
+    [ngClass]="{
+      executed: task.isCompleted === true,
+      notExecuted: task.isCompleted === false
+    }"
+    [checked]="task.isCompleted"
+    (click)="changeValue()"
+    >{{ task.text }}</mat-checkbox
+  >
+</p>

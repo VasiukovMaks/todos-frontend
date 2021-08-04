@@ -7,7 +7,6 @@ import 'reflect-metadata';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CardComponent } from './card/card.component';
-import { AppHttp } from './service/app.http';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { NewtaskComponent } from './newtask/newtask.component';
 
@@ -36,10 +35,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     HttpClientModule,
     MatDialogModule,
     MatCheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [MatIconModule],
-  providers: [AppHttp],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

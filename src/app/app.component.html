@@ -1,11 +1,11 @@
 <div class="container">
-    <header class="header">
-        <app-navbar [todosData]="todosData"></app-navbar>
-    </header>
-    <main>
-        <app-card
-        *ngFor="let iterCard of todosData; trackBy: identificate"
-        [card]="iterCard"
-        ></app-card>
-    </main>
+  <header class="header">
+    <app-navbar [todosData]="cards"></app-navbar>
+  </header>
+  <main>
+    <app-card
+      *ngFor="let iterCard of cards; trackBy: identificate"
+      [card]="iterCard"
+    ></app-card>
+  </main>
 </div>

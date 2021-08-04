@@ -1,43 +1,44 @@
 <div class="modalWindow">
-    <h4 mat-dialog-title>НОВАЯ ЗАДАЧА</h4>
-    <hr>
-        
-    <form [formGroup]="taskReactiveForm" (submit)="onSubmit()">
-        <input type="text" id="task" formControlName="task" placeholder="Название задачи..."/>
-        <br/><br/>
-        <select
-            required
-            formControlName="category"
-            (click)="checkSelect()">
-            <option value="" disabled selected hidden>Категория</option>
-            <option 
-                *ngFor="let category of this.data" 
-                [ngValue]="category.id">
-                {{ category.title }}
-            </option>
-            <option [ngValue]="this.data.length + 1" >Новая категория...</option>
-        </select> 
-        <br/><br/>
+  <h4 mat-dialog-title>НОВАЯ ЗАДАЧА</h4>
+  <hr />
 
-        <input 
-            placeholder="Новая категория..."
-            *ngIf="displayInput"
-            type="text" 
-            id="newcategory" 
-            formControlName="newСategory"/>
-        <div class="error" *ngIf="isControlInvalid('task')">
-            Навзание задачи должно быть длиннее 3 символов
-        </div>
-        <div class="error" *ngIf="isControlInvalid('category')">
-            Должна быть выбрана категория
-        </div>
-        <div class="error" *ngIf="isControlNewCategoryInvalid()">
-            Название категории должно быть длиннее 3 символов
-        </div>
+  <form [formGroup]="taskReactiveForm" (submit)="onSubmit()">
+    <input
+      type="text"
+      id="task"
+      formControlName="task"
+      placeholder="Название задачи..."
+    />
+    <br /><br />
+    <select required formControlName="category" (click)="checkSelect()">
+      <option value="" disabled selected hidden>Категория</option>
+      <option *ngFor="let category of this.data" [ngValue]="category.id">
+        {{ category.title }}
+      </option>
+      <option [ngValue]="0">Новая категория...</option>
+    </select>
+    <br /><br />
 
-        <div mat-dialog-actions>
-            <button mat-button mat-dialog-close id="cancel">ОТМЕНА</button>
-            <button mat-dialog-ok id="ok" type="submit">ОК</button>
-        </div>
-    </form>
+    <input
+      *ngIf="displayInput"
+      placeholder="Новая категория..."
+      type="text"
+      id="newcategory"
+      formControlName="newСategory"
+    />
+    <div class="error" *ngIf="isControlInvalid('task')">
+      Навзание задачи должно быть длиннее 3 символов
+    </div>
+    <div class="error" *ngIf="isControlInvalid('category')">
+      Должна быть выбрана категория
+    </div>
+    <div class="error" *ngIf="isControlNewCategoryInvalid()">
+      Название категории должно быть длиннее 3 символов
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close id="cancel">ОТМЕНА</button>
+      <button mat-dialog-ok id="ok" type="submit">ОК</button>
+    </div>
+  </form>
 </div>
