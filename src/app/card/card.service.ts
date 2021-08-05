@@ -15,7 +15,7 @@ export class CardService {
   );
 
   public delete_category(id: number): Observable<unknown> {
-    const url: string = environment.apiURL + 'category/' + id;
-    return this.httpClient.delete(url, { headers: this.headers }).pipe();
+    const url: string = environment.apiURL + 'categories/' + id;
+    return this.httpClient.delete(url, { headers: this.headers });
   }
 }

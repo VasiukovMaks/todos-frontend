@@ -23,4 +23,9 @@ export class AppService {
       .get(url, { headers: this.headers })
       .pipe(map((res: Object) => plainToClass(Card, res as Card[])));
   }
+
+  public delete_category(id: number): Observable<unknown> {
+    const url: string = environment.apiURL + 'categories/' + id;
+    return this.httpClient.delete(url, { headers: this.headers });
+  }
 }

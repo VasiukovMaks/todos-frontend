@@ -8,16 +8,25 @@ import { Card } from './card/card.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  cards: Card[] = [];
+  public cards: Card[] = [];
   constructor(private appService: AppService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.appService.get().subscribe((cards: Card[]) => {
       this.cards = cards;
     });
   }
 
-  identificate(index: number, item: Card): number {
-    return item.id;
+  public identificate(index: number): number {
+    return index;
+  }
+
+  public async deleteCard(id: number) {
+    try {
+      await this.appService.delete_category(id).subscribe();
+      this.cards = this.cards.filter((card) => card.id !== id);
+    } catch {
+      console.log('error');
+    }
   }
 }

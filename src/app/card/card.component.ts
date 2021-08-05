@@ -1,9 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Checkbox } from '../checkbox/checkbox.model';
 import { Card } from './card.model';
-import { CardService } from './card.service';
 
 @Component({
   selector: 'app-card',
@@ -12,9 +11,9 @@ import { CardService } from './card.service';
 })
 export class CardComponent {
   @Input() card!: Card;
+  @Output() deleteCard: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
-    private cardService: CardService,
     private matIconRegistry: MatIconRegistry,
     private domSanitzer: DomSanitizer
   ) {
@@ -28,7 +27,7 @@ export class CardComponent {
     return item.id;
   }
 
-  deleteCard() {
-    this.cardService.delete_category(this.card.id).subscribe(() => {});
+  public delCard() {
+    this.deleteCard.emit(this.card.id);
   }
 }
