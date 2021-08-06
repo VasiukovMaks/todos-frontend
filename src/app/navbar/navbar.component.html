@@ -1,7 +1,62 @@
-<mat-toolbar class="navbar">
-    <div></div>
-    <span>Задачи</span>
-    <button (click)="openWindow()" mat-icon-button aria-label="icon-button with plus icon">
-        <mat-icon svgIcon="plus">plus</mat-icon>
+<div class="navbar__container">
+  <div class="navbar__icon">
+    <img
+      class="navbar__main__icon"
+      src="../../assets/navbar/main-icon.png"
+      alt="icon"
+    />
+  </div>
+  <div class="navbar__navigation">
+    <button
+      [ngClass]="{
+        navbar__button: true,
+        navbar__button__active: activeTab === 'DASHBOARD'
+      }"
+      (click)="changeTab('DASHBOARD')"
+    >
+      <img
+        class="navbar__button__icon"
+        src="../../assets/navbar/{{ colorButton.dashboard }}-dashboard.png"
+        alt="icon"
+      />
+      <span>Dashboard</span>
     </button>
-</mat-toolbar>
+    <button
+      [ngClass]="{
+        navbar__button: true,
+        navbar__button__active: activeTab === 'ANALYTICS'
+      }"
+      (click)="changeTab('ANALYTICS')"
+    >
+      Analytics
+    </button>
+    <button
+      [ngClass]="{
+        navbar__button: true,
+        navbar__button__active: activeTab === 'TEAMS'
+      }"
+      (click)="changeTab('TEAMS')"
+    >
+      Teams
+    </button>
+    <button
+      [ngClass]="{
+        navbar__button: true,
+        navbar__button__active: activeTab === 'DOCUMENTS'
+      }"
+      (click)="changeTab('DOCUMENTS')"
+    >
+      Documents
+    </button>
+    <button
+      [ngClass]="{
+        navbar__button: true,
+        navbar__button__active: activeTab === 'SETTINGS'
+      }"
+      (click)="changeTab('SETTINGS')"
+    >
+      Settings
+    </button>
+  </div>
+  <div class="navbar_workspace">My Workspace</div>
+</div>

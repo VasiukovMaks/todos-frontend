@@ -1,12 +1,15 @@
 <div class="card">
-  <div class="cardTitle">{{ card.title }}</div>
-  <button
-    (click)="delCard()"
-    mat-icon-button
-    aria-label="icon-button with cross icon"
-  >
-    <mat-icon svgIcon="close">close</mat-icon>
-  </button>
+  <div class="card-header">
+    <div class="cardTitle">{{ card.title }}</div>
+    <button
+      class="card-button"
+      (click)="delCard()"
+      mat-icon-button
+      aria-label="icon-button with cross icon"
+    >
+      <mat-icon svgIcon="close">close</mat-icon>
+    </button>
+  </div>
   <hr />
   <app-checkbox
     *ngFor="let iterTask of card.tasks; trackBy: identificate"

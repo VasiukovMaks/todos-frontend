@@ -1,7 +1,7 @@
 <div class="container">
-  <header class="header">
+  <nav class="header">
     <app-navbar [todosData]="cards"></app-navbar>
-  </header>
+  </nav>
   <main>
     <app-card
       *ngFor="let iterCard of cards; trackBy: identificate"

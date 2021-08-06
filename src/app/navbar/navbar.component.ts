@@ -1,7 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
 import { NewtaskComponent } from '../newtask/newtask.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Card } from '../card/card.model';
@@ -14,18 +11,22 @@ import { Card } from '../card/card.model';
 export class NavbarComponent {
   @Input() todosData: Card[] = [];
 
-  constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitzer: DomSanitizer,
-    private dialog: MatDialog
-  ) {
-    this.matIconRegistry.addSvgIcon(
-      'plus',
-      this.domSanitzer.bypassSecurityTrustResourceUrl('assets/navbar/plus.svg')
-    );
-  }
+  public activeTab: string = 'DASHBOARD';
+  public colorButton: {
+    dashboard: string;
+  } = {
+    dashboard: 'white',
+  };
+
+  constructor(private dialog: MatDialog) {}
 
   openWindow() {
     this.dialog.open(NewtaskComponent, { data: this.todosData });
+  }
+
+  changeTab(tabsType: string) {
+    this.activeTab = tabsType;
+    this.colorButton.dashboard =
+      this.colorButton.dashboard === 'black' ? 'white' : 'black';
   }
 }
