@@ -1,15 +1,9 @@
 <div class="container">
   <nav class="header">
-    <app-navbar
-      [todosData]="cards"
-      (active_page)="activeted_page($event)"
-    ></app-navbar>
+    <app-navbar (active_page)="activate_page($event)"></app-navbar>
   </nav>
-  <main *ngIf="is_dashboard">
-    <app-card
-      *ngFor="let iterCard of cards; trackBy: identificate"
-      [card]="iterCard"
-      (deleteCard)="deleteCard($event)"
-    ></app-card>
+  <main>
+    <app-dashboard *ngIf="is_dashboard"></app-dashboard>
+    <app-settings *ngIf="is_settings"></app-settings>
   </main>
 </div>

@@ -9,7 +9,7 @@ import { Card } from '../card/card.model';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  @Input() todosData: Card[] = [];
+  // @Input() todosData: Card[] = [];
   @Output() active_page: EventEmitter<string> = new EventEmitter<string>();
 
   public activeTab: string = 'dashboard';
@@ -38,13 +38,13 @@ export class NavbarComponent {
 
   constructor(private dialog: MatDialog) {}
 
-  private openWindow() {
-    this.dialog.open(NewtaskComponent, { data: this.todosData });
-  }
+  // private openWindow() {
+  //   this.dialog.open(NewtaskComponent, { data: this.todosData });
+  // }
 
   public changeTab(tabsType: string) {
     if (this.activeTab !== 'dashboard' && tabsType === 'dashboard') {
-      this.openWindow();
+      // this.openWindow();
     }
     this.tabs[`${this.activeTab}`].color = 'black';
     this.tabs[`${tabsType}`].color = 'white';

@@ -16,6 +16,6 @@ main {
   margin: auto;
   padding-top: 15px;
 }
-app-card {
-  width: 33%;
+app-dashboard {
+  width: 100%;
 }

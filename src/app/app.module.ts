@@ -17,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CardComponent,
     CheckboxComponent,
     NewtaskComponent,
+    DashboardComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

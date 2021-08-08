@@ -1,0 +1,7 @@
+<div class="dashboard__container">
+  <app-card
+    *ngFor="let iterCard of cards; trackBy: identificate"
+    [card]="iterCard"
+    (deleteCard)="deleteCard($event)"
+  ></app-card>
+</div>
