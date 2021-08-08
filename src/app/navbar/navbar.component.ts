@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NewtaskComponent } from '../newtask/newtask.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Card } from '../card/card.model';
@@ -10,23 +10,48 @@ import { Card } from '../card/card.model';
 })
 export class NavbarComponent {
   @Input() todosData: Card[] = [];
+  @Output() active_page: EventEmitter<string> = new EventEmitter<string>();
 
-  public activeTab: string = 'DASHBOARD';
-  public colorButton: {
-    dashboard: string;
-  } = {
-    dashboard: 'white',
+  public activeTab: string = 'dashboard';
+  public tabs: { [tab_name: string]: { color: string; active: boolean } } = {
+    dashboard: {
+      color: 'white',
+      active: true,
+    },
+    analytics: {
+      color: 'black',
+      active: false,
+    },
+    teams: {
+      color: 'black',
+      active: false,
+    },
+    documents: {
+      color: 'black',
+      active: false,
+    },
+    settings: {
+      color: 'black',
+      active: false,
+    },
   };
 
   constructor(private dialog: MatDialog) {}
 
-  openWindow() {
+  private openWindow() {
     this.dialog.open(NewtaskComponent, { data: this.todosData });
   }
 
-  changeTab(tabsType: string) {
+  public changeTab(tabsType: string) {
+    if (this.activeTab !== 'dashboard' && tabsType === 'dashboard') {
+      this.openWindow();
+    }
+    this.tabs[`${this.activeTab}`].color = 'black';
+    this.tabs[`${tabsType}`].color = 'white';
+    this.tabs[`${this.activeTab}`].active = false;
+    this.tabs[`${tabsType}`].active = true;
     this.activeTab = tabsType;
-    this.colorButton.dashboard =
-      this.colorButton.dashboard === 'black' ? 'white' : 'black';
+
+    this.active_page.emit(tabsType);
   }
 }

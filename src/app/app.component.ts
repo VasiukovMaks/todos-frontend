@@ -9,6 +9,10 @@ import { Card } from './card/card.model';
 })
 export class AppComponent implements OnInit {
   public cards: Card[] = [];
+  private active_page: string = 'dashboard';
+  public activeted_page(page: string) {
+    this.active_page = page;
+  }
   constructor(private appService: AppService) {}
 
   public ngOnInit(): void {
@@ -28,5 +32,9 @@ export class AppComponent implements OnInit {
     } catch {
       console.log('error');
     }
+  }
+
+  public get is_dashboard() {
+    return this.active_page === 'dashboard';
   }
 }

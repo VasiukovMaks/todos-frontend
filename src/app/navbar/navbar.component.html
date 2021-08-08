@@ -10,52 +10,72 @@
     <button
       [ngClass]="{
         navbar__button: true,
-        navbar__button__active: activeTab === 'DASHBOARD'
+        navbar__button__active: activeTab === 'dashboard'
       }"
-      (click)="changeTab('DASHBOARD')"
+      (click)="changeTab('dashboard')"
     >
       <img
         class="navbar__button__icon"
-        src="../../assets/navbar/{{ colorButton.dashboard }}-dashboard.png"
+        src="../../assets/navbar/{{ tabs.dashboard.color }}-dashboard.png"
         alt="icon"
       />
-      <span>Dashboard</span>
+      <div class="navbar__tab__name">Dashboard</div>
     </button>
     <button
       [ngClass]="{
         navbar__button: true,
-        navbar__button__active: activeTab === 'ANALYTICS'
+        navbar__button__active: activeTab === 'analytics'
       }"
-      (click)="changeTab('ANALYTICS')"
+      (click)="changeTab('analytics')"
     >
-      Analytics
+      <img
+        class="navbar__button__icon"
+        src="../../assets/navbar/{{ tabs.analytics.color }}-analytics.png"
+        alt="icon"
+      />
+      <div class="navbar__tab__name">Analytics</div>
     </button>
     <button
       [ngClass]="{
         navbar__button: true,
-        navbar__button__active: activeTab === 'TEAMS'
+        navbar__button__active: activeTab === 'teams'
       }"
-      (click)="changeTab('TEAMS')"
+      (click)="changeTab('teams')"
     >
-      Teams
+      <img
+        class="navbar__button__icon"
+        src="../../assets/navbar/{{ tabs.teams.color }}-teams.png"
+        alt="icon"
+      />
+      <div class="navbar__tab__name">Teams</div>
     </button>
     <button
       [ngClass]="{
         navbar__button: true,
-        navbar__button__active: activeTab === 'DOCUMENTS'
+        navbar__button__active: activeTab === 'documents'
       }"
-      (click)="changeTab('DOCUMENTS')"
+      (click)="changeTab('documents')"
     >
-      Documents
+      <img
+        class="navbar__button__icon"
+        src="../../assets/navbar/{{ tabs.documents.color }}-documents.png"
+        alt="icon"
+      />
+      <div class="navbar__tab__name">Documents</div>
     </button>
     <button
       [ngClass]="{
         navbar__button: true,
-        navbar__button__active: activeTab === 'SETTINGS'
+        navbar__button__active: activeTab === 'settings'
       }"
-      (click)="changeTab('SETTINGS')"
+      (click)="changeTab('settings')"
     >
-      Settings
+      <img
+        class="navbar__button__icon"
+        src="../../assets/navbar/{{ tabs.settings.color }}-settings.png"
+        alt="icon"
+      />
+      <div class="navbar__tab__name">Settings</div>
     </button>
   </div>
   <div class="navbar_workspace">My Workspace</div>
