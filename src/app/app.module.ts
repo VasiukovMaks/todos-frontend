@@ -9,6 +9,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CardComponent } from './card/card.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { NewtaskComponent } from './newtask/newtask.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SettingsComponent } from './settings/settings.component';
 
 //Angular Material Components
 import { MatSliderModule } from '@angular/material/slider';
@@ -17,8 +19,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SettingsComponent } from './settings/settings.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { SettingsComponent } from './settings/settings.component';
     NewtaskComponent,
     DashboardComponent,
     SettingsComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +45,9 @@ import { SettingsComponent } from './settings/settings.component';
     MatDialogModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
   ],
   exports: [MatIconModule],
   bootstrap: [AppComponent],

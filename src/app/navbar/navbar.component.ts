@@ -9,7 +9,6 @@ import { Card } from '../card/card.model';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  // @Input() todosData: Card[] = [];
   @Output() active_page: EventEmitter<string> = new EventEmitter<string>();
 
   public activeTab: string = 'dashboard';
