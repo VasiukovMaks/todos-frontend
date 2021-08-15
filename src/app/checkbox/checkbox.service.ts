@@ -6,17 +6,13 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 import { Checkbox } from '../checkbox/checkbox.model';
+import { ApiService } from '../services/api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckboxService {
-  constructor(private httpClient: HttpClient) {}
-
-  headers: HttpHeaders = new HttpHeaders().set(
-    'Access-Control-Allow-Origin',
-    '*'
-  );
+  constructor(private httpClient: HttpClient, private apiService: ApiService) {}
 
   public patch(
     id_task: number,
@@ -28,7 +24,7 @@ export class CheckboxService {
       .put(
         url,
         { isCompleted: isCompleted, text: text },
-        { headers: this.headers }
+        { headers: this.apiService.getHeaders() }
       )
       .pipe(map((res: Object) => plainToClass(Checkbox, res)));
   }

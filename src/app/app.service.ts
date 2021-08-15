@@ -6,9 +6,4 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
   constructor() {}
-
-  headers: HttpHeaders = new HttpHeaders().set(
-    'Access-Control-Allow-Origin',
-    '*'
-  );
 }

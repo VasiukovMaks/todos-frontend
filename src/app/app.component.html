@@ -1,10 +1,12 @@
 <div class="container">
-  <!-- <nav class="header">
-    <app-navbar (active_page)="activate_page($event)"></app-navbar>
-  </nav>
-  <main>
-    <app-dashboard *ngIf="is_dashboard"></app-dashboard>
-    <app-settings *ngIf="is_settings"></app-settings>
-  </main> -->
-  <app-auth></app-auth>
+  <div *ngIf="is_authorize" class="content">
+    <nav class="header">
+      <app-navbar (active_page)="activate_page($event)"></app-navbar>
+    </nav>
+    <main>
+      <app-dashboard *ngIf="is_dashboard"></app-dashboard>
+      <app-settings *ngIf="is_settings"></app-settings>
+    </main>
+  </div>
+  <app-auth *ngIf="!is_authorize" authorized="authorized($event)"></app-auth>
 </div>
