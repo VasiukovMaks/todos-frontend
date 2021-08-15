@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { Checkbox } from '../checkbox/checkbox.model';
+import { Checkbox } from './checkbox.model';
 
 export class Card {
   readonly id: number = 0;

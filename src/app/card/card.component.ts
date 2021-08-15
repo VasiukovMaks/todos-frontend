@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Checkbox } from '../checkbox/checkbox.model';
-import { Card } from './card.model';
+import { Checkbox } from '../core/models/checkbox.model';
+import { Card } from '../core/models/card.model';
 
 @Component({
   selector: 'app-card',

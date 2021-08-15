@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Checkbox } from './checkbox.model';
-import { CheckboxService } from './checkbox.service';
+import { Checkbox } from '../core/models/checkbox.model';
+import { CheckboxService } from '../core/services/checkbox.service';
 
 @Component({
   selector: 'app-checkbox',

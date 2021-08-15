@@ -8,9 +8,9 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Card } from '../card/card.model';
-import { Checkbox } from '../checkbox/checkbox.model';
-import { NewTaskService } from './newtask.service';
+import { Card } from '../core/models/card.model';
+import { Checkbox } from '../core/models/checkbox.model';
+import { NewTaskService } from '../core/services/newtask.service';
 
 @Component({
   selector: 'app-newtask',

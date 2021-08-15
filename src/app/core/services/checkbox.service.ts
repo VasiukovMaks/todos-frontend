@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
 
 import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
-import { Checkbox } from '../checkbox/checkbox.model';
-import { ApiService } from '../services/api.service';
+import { Checkbox } from '../models/checkbox.model';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',

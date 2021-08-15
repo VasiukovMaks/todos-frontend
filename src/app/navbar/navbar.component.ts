@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NewtaskComponent } from '../newtask/newtask.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Card } from '../card/card.model';
+import { Card } from '../core/models/card.model';
 
 @Component({
   selector: 'app-navbar',

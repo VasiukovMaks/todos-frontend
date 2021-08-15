@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AuthService } from '../pages/auth/auth.service';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-settings',

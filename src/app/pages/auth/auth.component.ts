@@ -5,10 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 export interface ResponseWithToken {
   access_token: string;
+  user: Object;
 }
 
 @Component({
@@ -54,6 +55,7 @@ export class AuthComponent implements OnInit {
       pass: ['', [Validators.required]],
     });
   }
+
   public onSubmit() {
     const controls: { [key: string]: AbstractControl } =
       this.registoryForm.controls;
@@ -62,12 +64,19 @@ export class AuthComponent implements OnInit {
     }
     this.authService
       .registery(controls.email.value, controls.pass.value, controls.name.value)
-      .subscribe((resp) => console.log(resp));
+      .subscribe(() => {
+        this.authService
+          .login(controls.email.value, controls.pass.value)
+          .subscribe((resp: ResponseWithToken) => {
+            localStorage.setItem('token', resp.access_token);
+            this.authorized.emit(true);
+          });
+      });
   }
+
   public login() {
     const controls: { [key: string]: AbstractControl } =
       this.loginForm.controls;
-    console.log(controls);
     if (this.loginForm.status === 'INVALID') {
       return;
     }

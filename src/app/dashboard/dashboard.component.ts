@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Card } from '../card/card.model';
+import { Card } from '../core/models/card.model';
 import { NewtaskComponent } from '../newtask/newtask.component';
-import { DashboardService } from './dashboard.service';
+import { DashboardService } from '../core/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
