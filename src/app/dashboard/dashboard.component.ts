@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Card } from '../card/card.model';
+import { NewtaskComponent } from '../newtask/newtask.component';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -10,7 +12,10 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
   public cards: Card[] = [];
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.dashboardService.get().subscribe((cards: Card[]) => {
@@ -29,5 +34,9 @@ export class DashboardComponent implements OnInit {
     } catch {
       console.log('error');
     }
+  }
+
+  public addTask() {
+    this.dialog.open(NewtaskComponent, { data: this.cards });
   }
 }

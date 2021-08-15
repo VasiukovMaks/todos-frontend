@@ -5,8 +5,8 @@
     </nav>
     <main>
       <app-dashboard *ngIf="is_dashboard"></app-dashboard>
-      <app-settings *ngIf="is_settings"></app-settings>
+      <app-settings *ngIf="is_settings" (init)="init()"></app-settings>
     </main>
   </div>
-  <app-auth *ngIf="!is_authorize" authorized="authorized($event)"></app-auth>
+  <app-auth *ngIf="!is_authorize" (authorized)="authorized($event)"></app-auth>
 </div>

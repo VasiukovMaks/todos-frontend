@@ -37,10 +37,6 @@ export class NavbarComponent {
 
   constructor(private dialog: MatDialog) {}
 
-  // private openWindow() {
-  //   this.dialog.open(NewtaskComponent, { data: this.todosData });
-  // }
-
   public changeTab(tabsType: string) {
     if (this.activeTab !== 'dashboard' && tabsType === 'dashboard') {
       // this.openWindow();

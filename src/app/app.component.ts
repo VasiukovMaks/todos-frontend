@@ -6,13 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  ngOnInit() {
-    if (localStorage.getItem('token')) {
-      this.is_authorize = true;
-    }
-  }
   private active_page: string = 'dashboard';
   public is_authorize: boolean = false;
+  ngOnInit() {
+    this.init();
+  }
+  public init() {
+    this.is_authorize = localStorage.getItem('token') ? true : false;
+    this.active_page = 'dashboard';
+  }
 
   public activate_page(page: string) {
     this.active_page = page;

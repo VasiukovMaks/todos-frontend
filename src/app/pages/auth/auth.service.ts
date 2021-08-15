@@ -35,4 +35,8 @@ export class AuthService {
       .post(url, body, { headers: this.headers })
       .pipe(map((res: any) => res));
   }
+
+  public logout(): void {
+    localStorage.clear();
+  }
 }
