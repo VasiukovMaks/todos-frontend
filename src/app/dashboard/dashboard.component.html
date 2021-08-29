@@ -1,4 +1,7 @@
 <div class="dashboard__container">
+  <div class="dashboard__header">
+    <h1>{{ auth.user.fname }}</h1>
+  </div>
   <app-card
     *ngFor="let iterCard of cards; trackBy: identificate"
     [card]="iterCard"

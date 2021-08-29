@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Card } from '../core/models/card.model';
 import { NewtaskComponent } from '../newtask/newtask.component';
 import { DashboardService } from '../core/services/dashboard.service';
+import { ApiService } from '../core/services/api.service';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +16,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {

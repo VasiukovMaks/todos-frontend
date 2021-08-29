@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 import { ResponseWithToken } from '../../pages/auth/auth.component';
 import { User } from '../models/user.model';
 import { plainToClass } from 'class-transformer';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private api: ApiService) {}
 
   public user: User = new User();
 
@@ -19,10 +20,7 @@ export class AuthService {
     this.user = user;
   }
 
-  headers: HttpHeaders = new HttpHeaders().set(
-    'Access-Control-Allow-Origin',
-    '*'
-  );
+  private headers: HttpHeaders = this.api.getHeaders();
 
   public registery(
     email: string,
@@ -46,6 +44,16 @@ export class AuthService {
       map((res: any) => {
         this.set_user(plainToClass(User, res.user));
         return res;
+      })
+    );
+  }
+
+  public autorizationByToken(): Observable<User> {
+    const url: string = environment.apiURL + 'token';
+    return this.httpClient.get(url, { headers: this.headers }).pipe(
+      map((res: any) => {
+        this.set_user(plainToClass(User, res));
+        return this.user;
       })
     );
   }
